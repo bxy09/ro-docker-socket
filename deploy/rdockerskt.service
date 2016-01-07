@@ -1,0 +1,12 @@
+[Unit]
+Description=Read only docker socket service
+After=network.target local-fs.target docker.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=-/etc/default/rdockerskt
+ExecStart=/opt/bin/rdockerskt $RDOCKER_SOCKET_OPTS
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
